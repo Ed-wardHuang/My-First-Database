@@ -1,0 +1,33 @@
+# asks for your database's name
+file_name = input('File name: ')
+
+# opens your file, and stores it in the database var
+f = open(file_name, 'r')
+raw_data = f.read()
+database = eval(raw_data)
+f.close()
+
+
+choice = input('Do you want to read or write, type "read" or "write": ')
+if choice == 'read':
+    while 1:
+        query = input('Query: ')
+        if query in database.keys():
+            print(database[query])
+        else:
+            print('DATA NOT FOUND')
+        if input('Type something and press enter if you want to quit, just press enter to continue querying... '):
+            break
+elif choice == 'write':
+    while 1:
+        key = input('Key: ')
+        value = input('Value: ')
+        database[key] = value
+        if input('Type something and press enter if you want to quit, just press enter to continue writing... '):
+            break
+
+
+# opens your database and stores it in the file
+f = open(file_name, 'w+')
+f.write(str(database))
+f.close()
